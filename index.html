@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -121,24 +121,39 @@
     <script type="module">
         // Import Firebase modules
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
+    
         // --- Firebase Configuration ---
-        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'formation-app-default';
+        // IMPORTANT : REMPLACEZ LES VALEURS DES CHAMPS CI-DESSOUS
+        // par celles que vous trouverez dans votre Console Firebase.
+        // Allez dans : Paramètres du projet (⚙️) > Vos applications > Sélectionnez votre app web.
+        const firebaseConfig = {
+            apiKey: "AIzaSyClA4dDLt6_buFWlbpQWI-3iCQYSVM7_UQ",
+            authDomain: "formulaire-inscrption.firebaseapp.com",
+            projectId: "formulaire-inscrption",
+            storageBucket: "formulaire-inscrption.firebasestorage.app",
+            messagingSenderId: "454024526276",
+            appId: "1:454024526276:web:8ca2936f046ec248370c91",
+            measurementId: "G-NS3F0GWDFC"
+};
 
+        // Nous allons utiliser l'appId de votre configuration Firebase
+        const appId = firebaseConfig.appId;
+    
         // --- Initialize Firebase ---
         let app, auth, db;
         try {
             app = initializeApp(firebaseConfig);
             auth = getAuth(app);
             db = getFirestore(app);
+            console.log("Firebase initialized successfully! The app is ready."); // Confirmation
         } catch (e) {
             console.error("Firebase initialization failed:", e);
+            // Affiche le message d'erreur si l'initialisation Firebase échoue
             document.body.innerHTML = '<div class="text-red-500 text-center p-8">Erreur: Impossible de charger l\'application. Veuillez vérifier votre connexion ou contacter le support.</div>';
         }
-
+    
         // --- DOM Elements ---
         const registrationForm = document.getElementById('registration-form');
         const registrationSection = document.getElementById('registration-section');
@@ -148,79 +163,115 @@
         const submitButton = document.getElementById('submit-button');
         const buttonText = document.getElementById('button-text');
         const buttonSpinner = document.getElementById('button-spinner');
-
+    
         // --- Firestore Collection Reference ---
-        const registrationsCollection = collection(db, `artifacts/${appId}/public/data/registrations`);
-
+        // S'assure que db est initialisé avant de créer la référence
+        let registrationsCollection;
+        if (db && app) {
+            // Chemin de la collection : 'artifacts/formation-app-default/public/data/registrations'
+            // Nous utilisons l'appId de firebaseConfig pour la flexibilité
+            registrationsCollection = collection(db, `artifacts/${appId.split(':')[2]}/public/data/registrations`);
+            // Note: L'appId est souvent de la forme '1:projectId:web:appIdHash'.
+            // J'ai pris la partie appIdHash pour construire le chemin.
+            // Si vous avez un appId comme 'formation-app-default' directement, utilisez-le.
+            // Autrement, vous pourriez vouloir un chemin plus simple comme 'registrations' directement.
+            // Par défaut, le chemin "artifacts/{appId}/public/data/registrations" est très spécifique à Firebase App Hosting.
+            // Pour un projet standard, un chemin comme `collection(db, "registrations")` est plus commun.
+            // Je le laisse tel quel pour correspondre à votre code original, mais gardez cette note en tête.
+        } else {
+            console.error("Firestore DB not initialized, cannot create collection reference.");
+        }
+    
+    
         // --- Authentication ---
+        // S'assure que submitButton est désactivé si l'auth n'est pas prête
+        if (submitButton) {
+            submitButton.disabled = true; // Désactive le bouton par défaut
+        }
+    
+        // Gère l'état d'authentification et active/désactive le formulaire
         onAuthStateChanged(auth, user => {
             if (user) {
-                // User is signed in. It's now safe to enable the form.
                 console.log("User is authenticated with UID:", user.uid);
-                submitButton.disabled = false;
+                if (submitButton) submitButton.disabled = false; // Active le bouton
             } else {
-                // No user is signed in. Keep form disabled.
-                console.log("No user signed in. Waiting for authentication...");
-                submitButton.disabled = true;
+                console.log("No user signed in. Keeping button disabled.");
+                if (submitButton) submitButton.disabled = true; // Garde le bouton désactivé
+                // Si l'utilisateur n'est pas connecté, essayons de le connecter anonymement
+                // Ce log se déclenchera à nouveau après la tentative de signInAnonymously
             }
         });
-
-        // This function handles the initial sign-in process.
+    
+        // Fonction pour gérer le processus initial de connexion
         async function handleAuthentication() {
             try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
+                // Dans ce cas, nous allons toujours tenter une connexion anonyme
+                // car votre code original semblait dépendre de variables d'environnement spécifiques
+                // pour d'autres types d'authentification (comme __initial_auth_token)
+                await signInAnonymously(auth);
+                console.log("Signed in anonymously.");
             } catch (error) {
-                console.error("Authentication failed:", error);
-                registrationSection.innerHTML = '<p class="text-red-500 text-center p-4">Erreur d\'authentification. Impossible de charger le formulaire.</p>';
+                console.error("Authentication failed during handleAuthentication:", error);
+                // Affiche un message d'erreur si l'authentification échoue
+                if (registrationSection) {
+                    registrationSection.innerHTML = '<p class="text-red-500 text-center p-4">Erreur d\'authentification. Impossible de charger le formulaire.</p>';
+                }
             }
         }
         
-        // Start the authentication process when the script loads.
-        handleAuthentication();
-
-
+        // Lance le processus d'authentification dès que le script est chargé et Firebase initialisé
+        // S'assure que 'auth' est défini avant d'appeler handleAuthentication
+        if (auth) {
+            handleAuthentication();
+        } else {
+            console.error("Firebase Auth not initialized, cannot call handleAuthentication.");
+        }
+    
         // --- Form Submission Logic ---
-        registrationForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            
-            setLoading(true);
-
-            const formData = new FormData(registrationForm);
-            const registrationData = {
-                lastName: formData.get('lastName'),
-                firstName: formData.get('firstName'),
-                email: formData.get('email'),
-                phone: formData.get('phone'),
-                professionalStatus: formData.get('professionalStatus'),
-                howHeard: formData.get('howHeard'),
-                expectations: formData.get('expectations'),
-                registeredAt: new Date()
-            };
-
-            try {
-                const docRef = await addDoc(registrationsCollection, registrationData);
-                console.log("Document written with ID: ", docRef.id);
-
-                successName.textContent = `${registrationData.firstName} ${registrationData.lastName}`;
-                registrationIdEl.textContent = docRef.id;
-                registrationSection.classList.add('hidden');
-                successMessage.classList.remove('hidden');
-
-            } catch (error) {
-                console.error("Error adding document: ", error);
-                // We use a custom modal or message box in a real app, but alert is a simple fallback.
-                alert("Une erreur est survenue lors de l'inscription. Veuillez réessayer.");
-            } finally {
-                setLoading(false);
-            }
-        });
-
+        if (registrationForm) {
+            registrationForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                setLoading(true);
+    
+                const formData = new FormData(registrationForm);
+                const registrationData = {
+                    lastName: formData.get('lastName'),
+                    firstName: formData.get('firstName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    professionalStatus: formData.get('professionalStatus'),
+                    howHeard: formData.get('howHeard'),
+                    expectations: formData.get('expectations'),
+                    registeredAt: new Date()
+                };
+    
+                try {
+                    if (!registrationsCollection) {
+                        throw new Error("Firestore collection reference not initialized.");
+                    }
+                    const docRef = await addDoc(registrationsCollection, registrationData);
+                    console.log("Document written with ID: ", docRef.id);
+    
+                    if (successName) successName.textContent = `${registrationData.firstName} ${registrationData.lastName}`;
+                    if (registrationIdEl) registrationIdEl.textContent = docRef.id;
+                    if (registrationSection) registrationSection.classList.add('hidden');
+                    if (successMessage) successMessage.classList.remove('hidden');
+    
+                } catch (error) {
+                    console.error("Error adding document: ", error);
+                    alert("Une erreur est survenue lors de l'inscription. Veuillez réessayer. Détails : " + error.message);
+                } finally {
+                    setLoading(false);
+                }
+            });
+        }
+    
+    
         // --- UI Helper Functions ---
         function setLoading(isLoading) {
+            if (!submitButton || !buttonText || !buttonSpinner) return; // Assure que les éléments existent
+    
             if (isLoading) {
                 submitButton.disabled = true;
                 buttonText.classList.add('hidden');
@@ -231,7 +282,7 @@
                 buttonSpinner.classList.add('hidden');
             }
         }
-
     </script>
+    
 </body>
 </html>
