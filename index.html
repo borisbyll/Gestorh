@@ -270,3 +270,291 @@
     
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription à la Formation: Le Profil Qui Se Vend</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+        .btn-glow {
+            box-shadow: 0 0 5px #FBBF24, 0 0 10px #FBBF24, 0 0 15px #FBBF24;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden">
+            
+            <!-- Header Section with Flyer Image -->
+            <div class="md:flex">
+                <div class="md:flex-shrink-0">
+                    <img class="h-full w-full object-cover md:w-64" src="https://storage.googleapis.com/gemini-prod-us-west1-409903433290/uploaded/profil%20qui%20vend%20end%20end.jpg" alt="Flyer de la formation 'Le profil qui se vend'">
+                </div>
+                <div class="p-8 flex flex-col justify-center">
+                    <p class="font-semibold text-gray-500 mb-2">Organisé par GESTORH</p>
+                    <div class="uppercase tracking-wide text-sm text-amber-500 font-semibold">Formation Exclusive</div>
+                    <h1 class="block mt-1 text-2xl leading-tight font-bold text-black">Le Profil Qui Se Vend</h1>
+                    <p class="mt-2 text-gray-600">Attirez les opportunités, excellez dans votre domaine.</p>
+                    <div class="mt-4 space-y-2 text-gray-700">
+                        <p><strong><span class="text-amber-600">Date:</span></strong> 16/08/2025</p>
+                        <p><strong><span class="text-amber-600">Heure:</span></strong> 15h - 17h</p>
+                        <p><strong><span class="text-amber-600">Lieu:</span></strong> GESTORH</p>
+                        <p><strong><span class="text-amber-600">Pass:</span></strong> 5000 F CFA</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration Form Section -->
+            <div id="registration-section" class="p-8 border-t border-gray-200">
+                <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Formulaire d'Inscription</h2>
+                <form id="registration-form" class="space-y-6">
+                    <div>
+                        <label for="lastName" class="block text-sm font-medium text-gray-700">Nom</label>
+                        <input type="text" id="lastName" name="lastName" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="firstName" class="block text-sm font-medium text-gray-700">Prénom(s)</label>
+                        <input type="text" id="firstName" name="firstName" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-gray-700">Adresse Email</label>
+                        <input type="email" id="email" name="email" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label for="phone" class="block text-sm font-medium text-gray-700">Numéro de Téléphone</label>
+                        <input type="tel" id="phone" name="phone" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                    </div>
+                    
+                    <!-- Survey Questions -->
+                    <div class="pt-4 border-t">
+                         <label for="professionalStatus" class="block text-sm font-medium text-gray-700">Quel est votre statut professionnel actuel ?</label>
+                         <select id="professionalStatus" name="professionalStatus" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                            <option>Étudiant(e)</option>
+                            <option>Employé(e)</option>
+                            <option>Entrepreneur(e)</option>
+                            <option>En recherche d'emploi</option>
+                            <option>Autre</option>
+                         </select>
+                    </div>
+                    <div>
+                        <label for="howHeard" class="block text-sm font-medium text-gray-700">Comment avez-vous entendu parler de nous ?</label>
+                        <select id="howHeard" name="howHeard" required class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm">
+                            <option>Réseaux sociaux (Facebook, LinkedIn, etc.)</option>
+                            <option>Recommandation / Bouche à oreille</option>
+                            <option>Recherche Google</option>
+                            <option>Email / Newsletter</option>
+                            <option>Autre</option>
+                        </select>
+                    </div>
+                     <div>
+                        <label for="expectations" class="block text-sm font-medium text-gray-700">Quelles sont vos attentes pour cette formation ? (Optionnel)</label>
+                        <textarea id="expectations" name="expectations" rows="3" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm"></textarea>
+                    </div>
+
+                    <div>
+                        <button type="submit" id="submit-button" disabled class="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-all duration-300 btn-glow disabled:opacity-50 disabled:cursor-not-allowed">
+                            <span id="button-text">M'inscrire (5000 F)</span>
+                            <svg id="button-spinner" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Success Message Section -->
+            <div id="success-message" class="p-8 text-center hidden">
+                 <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-green-100">
+                    <svg class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                </div>
+                <h3 class="mt-5 text-2xl font-bold text-gray-900">Inscription Réussie!</h3>
+                <p class="mt-2 text-md text-gray-600">Merci, <span id="success-name" class="font-semibold"></span>! Votre inscription a bien été enregistrée.</p>
+                <p class="mt-1 text-sm text-gray-500">Vous recevrez bientôt un email de confirmation avec les détails pour le paiement.</p>
+                <p class="mt-4 text-xs text-gray-400">Votre ID d'inscription: <code id="registration-id" class="bg-gray-200 p-1 rounded"></code></p>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    
+        // --- Firebase Configuration ---
+        // IMPORTANT : REMPLACEZ LES VALEURS DES CHAMPS CI-DESSOUS
+        // par celles que vous trouverez dans votre Console Firebase.
+        // Allez dans : Paramètres du projet (⚙️) > Vos applications > Sélectionnez votre app web.
+        const firebaseConfig = {
+            apiKey: "AIzaSyClA4dDLt6_buFWlbpQWI-3iCQYSVM7_UQ",
+            authDomain: "formulaire-inscrption.firebaseapp.com",
+            projectId: "formulaire-inscrption",
+            storageBucket: "formulaire-inscrption.firebasestorage.app",
+            messagingSenderId: "454024526276",
+            appId: "1:454024526276:web:8ca2936f046ec248370c91",
+            measurementId: "G-NS3F0GWDFC"
+};
+
+        // Nous allons utiliser l'appId de votre configuration Firebase
+        const appId = firebaseConfig.appId;
+    
+        // --- Initialize Firebase ---
+        let app, auth, db;
+        try {
+            app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            console.log("Firebase initialized successfully! The app is ready."); // Confirmation
+        } catch (e) {
+            console.error("Firebase initialization failed:", e);
+            // Affiche le message d'erreur si l'initialisation Firebase échoue
+            document.body.innerHTML = '<div class="text-red-500 text-center p-8">Erreur: Impossible de charger l\'application. Veuillez vérifier votre connexion ou contacter le support.</div>';
+        }
+    
+        // --- DOM Elements ---
+        const registrationForm = document.getElementById('registration-form');
+        const registrationSection = document.getElementById('registration-section');
+        const successMessage = document.getElementById('success-message');
+        const successName = document.getElementById('success-name');
+        const registrationIdEl = document.getElementById('registration-id');
+        const submitButton = document.getElementById('submit-button');
+        const buttonText = document.getElementById('button-text');
+        const buttonSpinner = document.getElementById('button-spinner');
+    
+        // --- Firestore Collection Reference ---
+        // S'assure que db est initialisé avant de créer la référence
+        let registrationsCollection;
+        if (db && app) {
+            // Chemin de la collection : 'artifacts/formation-app-default/public/data/registrations'
+            // Nous utilisons l'appId de firebaseConfig pour la flexibilité
+            registrationsCollection = collection(db, `artifacts/${appId.split(':')[2]}/public/data/registrations`);
+            // Note: L'appId est souvent de la forme '1:projectId:web:appIdHash'.
+            // J'ai pris la partie appIdHash pour construire le chemin.
+            // Si vous avez un appId comme 'formation-app-default' directement, utilisez-le.
+            // Autrement, vous pourriez vouloir un chemin plus simple comme 'registrations' directement.
+            // Par défaut, le chemin "artifacts/{appId}/public/data/registrations" est très spécifique à Firebase App Hosting.
+            // Pour un projet standard, un chemin comme `collection(db, "registrations")` est plus commun.
+            // Je le laisse tel quel pour correspondre à votre code original, mais gardez cette note en tête.
+        } else {
+            console.error("Firestore DB not initialized, cannot create collection reference.");
+        }
+    
+    
+        // --- Authentication ---
+        // S'assure que submitButton est désactivé si l'auth n'est pas prête
+        if (submitButton) {
+            submitButton.disabled = true; // Désactive le bouton par défaut
+        }
+    
+        // Gère l'état d'authentification et active/désactive le formulaire
+        onAuthStateChanged(auth, user => {
+            if (user) {
+                console.log("User is authenticated with UID:", user.uid);
+                if (submitButton) submitButton.disabled = false; // Active le bouton
+            } else {
+                console.log("No user signed in. Keeping button disabled.");
+                if (submitButton) submitButton.disabled = true; // Garde le bouton désactivé
+                // Si l'utilisateur n'est pas connecté, essayons de le connecter anonymement
+                // Ce log se déclenchera à nouveau après la tentative de signInAnonymously
+            }
+        });
+    
+        // Fonction pour gérer le processus initial de connexion
+        async function handleAuthentication() {
+            try {
+                // Dans ce cas, nous allons toujours tenter une connexion anonyme
+                // car votre code original semblait dépendre de variables d'environnement spécifiques
+                // pour d'autres types d'authentification (comme __initial_auth_token)
+                await signInAnonymously(auth);
+                console.log("Signed in anonymously.");
+            } catch (error) {
+                console.error("Authentication failed during handleAuthentication:", error);
+                // Affiche un message d'erreur si l'authentification échoue
+                if (registrationSection) {
+                    registrationSection.innerHTML = '<p class="text-red-500 text-center p-4">Erreur d\'authentification. Impossible de charger le formulaire.</p>';
+                }
+            }
+        }
+        
+        // Lance le processus d'authentification dès que le script est chargé et Firebase initialisé
+        // S'assure que 'auth' est défini avant d'appeler handleAuthentication
+        if (auth) {
+            handleAuthentication();
+        } else {
+            console.error("Firebase Auth not initialized, cannot call handleAuthentication.");
+        }
+    
+        // --- Form Submission Logic ---
+        if (registrationForm) {
+            registrationForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                setLoading(true);
+    
+                const formData = new FormData(registrationForm);
+                const registrationData = {
+                    lastName: formData.get('lastName'),
+                    firstName: formData.get('firstName'),
+                    email: formData.get('email'),
+                    phone: formData.get('phone'),
+                    professionalStatus: formData.get('professionalStatus'),
+                    howHeard: formData.get('howHeard'),
+                    expectations: formData.get('expectations'),
+                    registeredAt: new Date()
+                };
+    
+                try {
+                    if (!registrationsCollection) {
+                        throw new Error("Firestore collection reference not initialized.");
+                    }
+                    const docRef = await addDoc(registrationsCollection, registrationData);
+                    console.log("Document written with ID: ", docRef.id);
+    
+                    if (successName) successName.textContent = `${registrationData.firstName} ${registrationData.lastName}`;
+                    if (registrationIdEl) registrationIdEl.textContent = docRef.id;
+                    if (registrationSection) registrationSection.classList.add('hidden');
+                    if (successMessage) successMessage.classList.remove('hidden');
+    
+                } catch (error) {
+                    console.error("Error adding document: ", error);
+                    alert("Une erreur est survenue lors de l'inscription. Veuillez réessayer. Détails : " + error.message);
+                } finally {
+                    setLoading(false);
+                }
+            });
+        }
+    
+    
+        // --- UI Helper Functions ---
+        function setLoading(isLoading) {
+            if (!submitButton || !buttonText || !buttonSpinner) return; // Assure que les éléments existent
+    
+            if (isLoading) {
+                submitButton.disabled = true;
+                buttonText.classList.add('hidden');
+                buttonSpinner.classList.remove('hidden');
+            } else {
+                submitButton.disabled = false;
+                buttonText.classList.remove('hidden');
+                buttonSpinner.classList.add('hidden');
+            }
+        }
+    </script>
+    
+</body>
+</html>
