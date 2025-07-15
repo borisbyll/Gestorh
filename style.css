@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #f7fafc;
+  color: #2d3748;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+h1, h3 {
+  text-align: center;
+  color: #2c5282;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #3182ce;
+  box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.3);
+}
+
+button {
+  background-color: #f6ad55;
+  color: #fff;
+  font-weight: 700;
+  padding: 1rem;
+  border: none;
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #ed8936;
+}
+
+
+.img-wrapper {
+    max-width: 100%;
+    height: auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+  }
+  
+  .img-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+  button {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 2rem auto;
+    background-color: #f6ad55;
+    color: #fff;
+    font-weight: 700;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #f6ad55;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #ed8936;
+
+    .btn-submit {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #2c5282;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+  max-width: 220px;
+  width: 100%;
+}
+
+.btn-submit:hover {
+  background-color: #2b6cb0;
+}
+.btn-submit {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: #2c5282;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    max-width: 220px;
+    width: 100%;
+  }
+  
+  .btn-submit:hover {
+    background-color: #2b6cb0;
+  }
+  
+
+  }
+  @media screen and (max-width: 600px) {
+    .container {
+      padding: 1rem;
+    }
+  
+    h1, h3 {
+      font-size: 1.5rem;
+    }
+  
+    button {
+      max-width: 100%;
+    }
+  }
+      
